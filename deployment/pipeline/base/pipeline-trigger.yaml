@@ -2,24 +2,24 @@
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
-  name: vcs-trigger
+  name: vcs-trigger-fe
 spec:
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        generateName: build-be-
+        generateName: build-fe-
       spec:
         serviceAccountName: build-bot
         pipelineRef:
-          name: nodejs-be-pipeline
+          name: nodejs-pipeline
         params:
           - name: repo-url
-            value: https://github.com/cloud-native-garage-method-cohort/emea-5-project-squad2-be.git
+            value: https://github.com/cloud-native-garage-method-cohort/emea-5-project-squad2-fe.git
           - name: branch-name
             value: main
           - name: image-repo
-            value: quay.io/tkaatz/project-be
+            value: quay.io/tkaatz/squad2-fe
           - name: app-name
             value: backend
         workspaces:
@@ -35,28 +35,28 @@ spec:
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
-  name: vcs-trigger
+  name: vcs-trigger-fe
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: EventListener
 metadata:
-  name: vcs-trigger-be
+  name: vcs-trigger-fe
 spec:
   serviceAccountName: vcs-trigger
   triggers:
     - bindings:
-        - ref: vcs-trigger-be
+        - ref: vcs-trigger-fe
       template:
-        name: vcs-trigger-be
+        name: vcs-trigger-fe
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: vcs-trigger-be
+  name: vcs-trigger-fe
 spec:
   port:
     targetPort: 8080
   to:
     kind: Service
-    name: el-vcs-trigger-be
+    name: el-vcs-trigger-fe
     weight: 100

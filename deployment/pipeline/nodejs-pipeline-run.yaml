@@ -2,7 +2,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  generateName: build-node-
+  generateName: build-fe-
 spec:
   serviceAccountName: build-bot
   pipelineRef:
@@ -18,10 +18,10 @@ spec:
             storage: 300Mi
   params:
   - name: repo-url
-    value: https://github.com/13yo/express-sample-app.git
+    value: https://github.com/cloud-native-garage-method-cohort/emea-5-project-squad2-fe.git
   - name: branch-name
     value: main
   - name: image-repo
-    value: quay.io/tkaatz/hello-web
+    value: quay.io/tkaatz/squad2-fe
   - name: app-name
-    value: express-sample-app
+    value: backend

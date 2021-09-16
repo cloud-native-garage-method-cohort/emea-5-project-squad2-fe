@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/instance: express-sample-app-instance
     app.kubernetes.io/name: express-sample-app
     app.openshift.io/runtime: js
-  name: backend
+  name: frontend
 spec:
   progressDeadlineSeconds: 600
   replicas: 1

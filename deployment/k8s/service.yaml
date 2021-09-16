@@ -5,7 +5,7 @@ metadata:
     app: express-sample-app
     app.kubernetes.io/instance: express-sample-app-instance
     app.kubernetes.io/name: express-sample-app
-  name: backend
+  name: frontend
 spec:
   ports:
     - name: http
